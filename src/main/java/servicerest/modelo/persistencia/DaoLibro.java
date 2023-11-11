@@ -14,11 +14,11 @@ public class DaoLibro {
     public DaoLibro(){
         System.out.println("DaoLibro -> Creando lista de libros!");
         listaLibro = new ArrayList<>();
-        Libro l1 = new Libro(1,"Harry Potter y la piedra filosofa","J.K.Rowling",21);
-        Libro l2 = new Libro(2,"Harry Potter y la cámara secreta","J.K.Rowling",18);
-        Libro l3 = new Libro(3,"Harry Potter y el cáliz de fuego","J.K.Rowling",31);
-        Libro l4 = new Libro(4,"Harry Potter y la Orden del Fénix","J.K.Rowling",25);
-        Libro l5 = new Libro(5,"El Hobbit","J.R.R.Tolkien",20);
+        Libro l1 = new Libro(1,"Harry Potter y la piedra filosofa","J.K.Rowling",10);
+        Libro l2 = new Libro(2,"Harry Potter y la cámara secreta","J.K.Rowling",10);
+        Libro l3 = new Libro(3,"Harry Potter y el cáliz de fuego","J.K.Rowling",9);
+        Libro l4 = new Libro(4,"Harry Potter y la Orden del Fénix","J.K.Rowling",9);
+        Libro l5 = new Libro(5,"El Hobbit","J.R.R.Tolkien",8);
         listaLibro.add(l1);
         listaLibro.add(l2);
         listaLibro.add(l3);
