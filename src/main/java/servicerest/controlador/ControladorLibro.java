@@ -16,12 +16,14 @@ public class ControladorLibro {
     @Autowired
     private DaoLibro daoLibro;
 
-    @PostMapping(path = "libros",consumes = MediaType.APPLICATION_JSON_VALUE,
-         produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Libro> altaLibro(@RequestBody Libro l){
-        System.out.println("altaLibro: objeto Libro: " + l);
-        daoLibro.add(l);
-        return new ResponseEntity<>(l, HttpStatus.CREATED);
+    @PostMapping("/libros")
+    public ResponseEntity<String> altaLibro(@RequestBody Libro libro) {
+        try {
+            daoLibro.add(libro);
+            return new ResponseEntity<>("Libro añadido con éxito", HttpStatus.CREATED);
+        } catch (LibroExistenteException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @DeleteMapping(path = "libros/{id}")

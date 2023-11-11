@@ -1,6 +1,7 @@
 package servicerest.modelo.persistencia;
 
 import org.springframework.stereotype.Component;
+import servicerest.controlador.LibroExistenteException;
 import servicerest.modelo.entidad.Libro;
 
 import java.util.ArrayList;
@@ -54,28 +55,31 @@ public class DaoLibro {
         return false; // No existe un libro con el mismo ID
     }
 
-    public void add(Libro l){
-        if(!existeLibroConTitulo(l.getTitulo()) && !existeLibroConId(l.getId())){
+    public void add(Libro l) {
+        if (!existeLibroConTitulo(l.getTitulo()) && !existeLibroConId(l.getId())) {
             l.setId(l.getId());
             listaLibro.add(l);
         } else {
-            if(existeLibroConTitulo(l.getTitulo())){
-                System.out.println("Ya existe un libro con el mismo título. No se puede agregar.");
-            } else{
-                System.out.println("Ya existe un libro con el mismo id. No se puede agregar.");
+            if (existeLibroConTitulo(l.getTitulo())) {
+                throw new LibroExistenteException("Ya existe un libro con el mismo título. No se puede agregar.");
+            } else {
+                throw new LibroExistenteException("Ya existe un libro con el mismo id. No se puede agregar.");
             }
-
         }
     }
 
-    public Libro delete(int posicion) {
-        try {
-            return listaLibro.remove(posicion);
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("delete -> Libro eliminado");
-            return null;
+    public Libro delete(int id) {
+        for (Libro libro : listaLibro) {
+            if (libro.getId() == id) {
+                listaLibro.remove(libro);
+                System.out.println("delete -> Libro eliminado");
+                return libro;
+            }
         }
+        System.out.println("delete -> Libro no encontrado");
+        return null;
     }
+
 
     public Libro update(Libro l) {
         try {
