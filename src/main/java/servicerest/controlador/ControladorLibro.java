@@ -1,3 +1,11 @@
+/**
+ * Clase que actúa como controlador para la gestión de libros en un servicio REST.
+ * Proporciona endpoints para realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) en la entidad Libro.
+ *
+ * @author Jorge Ruiz Martinez
+ * @version 1.0
+ */
+
 package servicerest.controlador;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +18,22 @@ import servicerest.modelo.persistencia.DaoLibro;
 
 import java.util.List;
 
+/**
+ * Controlador para la gestión de libros en un servicio REST.
+ */
 @RestController
 public class ControladorLibro {
 
+    /** DAO para la entidad Libro. */
     @Autowired
     private DaoLibro daoLibro;
 
+    /**
+     * Endpoint para agregar un nuevo libro.
+     *
+     * @param libro El libro a agregar, proporcionado en el cuerpo de la solicitud.
+     * @return ResponseEntity con un mensaje de éxito o un mensaje de error si el libro ya existe.
+     */
     @PostMapping("/libros")
     public ResponseEntity<String> altaLibro(@RequestBody Libro libro) {
         try {
@@ -26,6 +44,12 @@ public class ControladorLibro {
         }
     }
 
+    /**
+     * Endpoint para eliminar un libro por su ID.
+     *
+     * @param id El ID del libro a eliminar, proporcionado como parte de la URL.
+     * @return ResponseEntity con el libro eliminado o un código de estado NOT_FOUND si no se encuentra.
+     */
     @DeleteMapping(path = "libros/{id}")
     public ResponseEntity<Libro> borrarLibro(@PathVariable("id") int id){
         System.out.println("Id eliminado " + id);
@@ -37,6 +61,13 @@ public class ControladorLibro {
         }
     }
 
+    /**
+     * Endpoint para modificar un libro existente por su ID.
+     *
+     * @param id El ID del libro a modificar, proporcionado como parte de la URL.
+     * @param l  El nuevo libro con la información actualizada, proporcionado en el cuerpo de la solicitud.
+     * @return ResponseEntity con un código de estado OK si la modificación es exitosa, o NOT_FOUND si no se encuentra el libro.
+     */
     @PutMapping(path = "libros/{id}",consumes = MediaType.APPLICATION_JSON_VALUE)
     public  ResponseEntity<Libro>modificarLibro(
             @PathVariable("id") int id,
@@ -52,6 +83,12 @@ public class ControladorLibro {
         }
     }
 
+    /**
+     * Endpoint para obtener un libro por su ID.
+     *
+     * @param id El ID del libro a obtener, proporcionado como parte de la URL.
+     * @return ResponseEntity con el libro encontrado o un código de estado NOT_FOUND si no se encuentra.
+     */
     @GetMapping(path = "libros/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Libro> getLibro(@PathVariable("id") int id){
         System.out.println("Buscando persona con id: " + id);
@@ -63,6 +100,12 @@ public class ControladorLibro {
         }
     }
 
+    /**
+     * Endpoint para listar libros, con la opción de filtrar por título.
+     *
+     * @param titulo El título del libro para filtrar la lista (opcional).
+     * @return ResponseEntity con la lista de libros, o un código de estado NOT_FOUND si no se encuentran libros.
+     */
     @GetMapping(path="libros",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Libro>> listarLibros(
             @RequestParam(name="titulo",required=false) String titulo) {
