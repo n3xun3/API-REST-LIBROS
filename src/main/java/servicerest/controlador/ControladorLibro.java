@@ -116,7 +116,7 @@ public class ControladorLibro {
             listaLibros = daoLibro.list();
         }else {
             System.out.println("Listando las personas por nombre: " + titulo);
-            listaLibros = daoLibro.listByTitulo(titulo);
+            listaLibros = daoLibro.listByEditorial(titulo);
         }
         System.out.println(listaLibros);
         return new ResponseEntity<>(listaLibros, HttpStatus.OK);
