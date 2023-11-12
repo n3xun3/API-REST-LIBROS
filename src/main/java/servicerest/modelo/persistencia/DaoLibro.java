@@ -152,15 +152,15 @@ public class DaoLibro {
     }
 
     /**
-     * Obtiene una lista de libros que tienen el título especificado.
+     * Obtiene una lista de libros que tienen el editorial especificado.
      *
-     * @param titulo El título de los libros a buscar.
-     * @return La lista de libros con el título especificado.
+     * @param editorial El editorial de los libros a buscar.
+     * @return La lista de libros con el editorial especificado.
      */
-    public List<Libro> listByTitulo(String titulo){
+    public List<Libro> listByEditorial(String editorial){
         List<Libro> listaPersonasAux = new ArrayList<>();
         for(Libro l : listaLibro) {
-            if(l.getTitulo().equalsIgnoreCase(titulo)) {//contains()
+            if(l.getTitulo().equalsIgnoreCase(editorial)) {//contains()
                 listaPersonasAux.add(l);
             }
         }
