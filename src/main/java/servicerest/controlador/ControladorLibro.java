@@ -51,13 +51,22 @@ public class ControladorLibro {
      * @return ResponseEntity con el libro eliminado o un código de estado NOT_FOUND si no se encuentra.
      */
     @DeleteMapping(path = "libros/{id}")
-    public ResponseEntity<Libro> borrarLibro(@PathVariable("id") int id){
-        System.out.println("Id eliminado " + id);
-        Libro l = daoLibro.delete(id);
-        if(l != null){
-            return new ResponseEntity<>(l, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<Void> borrarLibro(@PathVariable("id") int id) {
+        try {
+            System.out.println("Eliminando libro con ID: " + id);
+            Libro libroEliminado = daoLibro.delete(id);
+
+            if (libroEliminado != null) {
+                System.out.println("Libro eliminado con éxito. ID: " + libroEliminado.getId());
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            } else {
+                System.out.println("No se encontró el libro con ID: " + id);
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            System.err.println("Error al eliminar el libro con ID: " + id);
+            e.printStackTrace(); // Imprime la traza de la excepción en la consola
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
