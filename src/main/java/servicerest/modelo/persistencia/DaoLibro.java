@@ -139,7 +139,7 @@ public class DaoLibro {
      */
     public Libro update(Libro l) {
         try {
-            Libro pAux = listaLibro.get(l.getId());
+            Libro pAux = listaLibro.get(l.getId()-1);
             pAux.setTitulo(l.getTitulo());
             pAux.setEditorial(l.getEditorial());
             pAux.setNota(l.getNota());
