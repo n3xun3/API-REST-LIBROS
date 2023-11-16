@@ -53,9 +53,6 @@ La API proporciona las siguientes funcionalidades a través de sus endpoints:
 2. Importar el proyecto en un IDE compatible con Spring Boot (como IntelliJ IDEA o Eclipse).
 3. Ejecutar la aplicación desde la clase principal `ApiRestApplication.java`.
 
-## Contribuciones
-
-¡Las contribuciones son bienvenidas! Si encuentras algún problema o tienes sugerencias para mejorar la API, no dudes en crear un issue o enviar un pull request.
 
 ## Autor
 
