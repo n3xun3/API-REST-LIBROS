@@ -49,7 +49,7 @@ public class DaoLibro {
      */
     public Libro get(int posicion){
         try{
-            return listaLibro.get(posicion);
+            return listaLibro.get(posicion - 1);
         }catch(IndexOutOfBoundsException iobe){
             System.out.println("Libro no encontrado");
             return null;
@@ -139,14 +139,18 @@ public class DaoLibro {
      */
     public Libro update(Libro l) {
         try {
-            Libro pAux = listaLibro.get(l.getId()-1);
-            pAux.setTitulo(l.getTitulo());
-            pAux.setEditorial(l.getEditorial());
-            pAux.setNota(l.getNota());
-
-            return pAux;
-        } catch (IndexOutOfBoundsException iobe) {
-            System.out.println("update -> Libro actualizado");
+            for (Libro libro : listaLibro) {
+                if (libro.getId() == l.getId()) {
+                    libro.setTitulo(l.getTitulo());
+                    libro.setEditorial(l.getEditorial());
+                    libro.setNota(l.getNota());
+                    return libro; // Retornamos el libro actualizado
+                }
+            }
+            System.out.println("No se encontró un libro con el ID proporcionado.");
+            return null;
+        } catch (Exception e) {
+            System.out.println("Error al intentar actualizar el libro: " + e.getMessage());
             return null;
         }
     }
